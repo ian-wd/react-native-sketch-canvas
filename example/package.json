@@ -3,22 +3,30 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "pods": "pod-install --quiet"
   },
   "dependencies": {
-    "@terrylinla/react-native-sketch-canvas": "file:..",
-    "react": "^16.4.1",
-    "react-native": "^0.56.0",
-    "react-native-camera": "1.1.4"
+    "react": "18.2.0",
+    "react-native": "0.74.3",
+    "@sourcetoad/react-native-sketch-canvas": "../",
+    "react-native-camera": "https://github.com/sourcetoad/react-native-camera#ee265b22c7a3544a720478a6397d0e547430ff93"
   },
   "devDependencies": {
-    "babel-jest": "23.4.0",
-    "babel-preset-react-native": "5.0.0",
-    "jest": "23.4.1",
-    "react-test-renderer": "16.4.1"
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@babel/runtime": "^7.22.5",
+    "@react-native/babel-preset": "0.74.85",
+    "@react-native/eslint-config": "0.74.85",
+    "@react-native/metro-config": "0.74.85",
+    "babel-plugin-module-resolver": "^5.0.0"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }

@@ -1,0 +1,37 @@
+name: Publish to NPM/GPR
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    environment: deploy
+    runs-on: ubuntu-latest
+
+    name: Publish
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: NPM Install
+        run: npm ci
+
+      - name: Publish (NPM)
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - uses: actions/setup-node@v3
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Publish (GPR)
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

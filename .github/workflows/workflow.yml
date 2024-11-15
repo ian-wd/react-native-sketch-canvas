@@ -1,0 +1,28 @@
+name: RNSketchCanvas CI
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Lint and Tests
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: NPM Install
+        run: npm ci
+
+      - name: Linting
+        run: npm run lint
+
+      - name: Typing
+        run: npm run typescript
+
+      - name: Testing
+        run: npm run test --coverage
+
+      - name: Prepare Build
+        run: npm run build
